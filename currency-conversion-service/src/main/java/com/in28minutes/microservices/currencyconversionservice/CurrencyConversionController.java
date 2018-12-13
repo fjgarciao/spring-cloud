@@ -1,6 +1,7 @@
 package com.in28minutes.microservices.currencyconversionservice;
 
 import com.in28minutes.microservices.currencyconversionservice.bean.CurrencyConversion;
+import com.in28minutes.microservices.currencyexchangeservice.bean.ExchangeValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,8 +28,8 @@ public class CurrencyConversionController {
         uriVariables.put("from", from);
         uriVariables.put("to", to);
 
-        ResponseEntity<CurrencyConversion> responseEntity = new RestTemplate().getForEntity("http://localhost:8000/currency-exchange/from/{from}/to/{to}", CurrencyConversion.class, uriVariables);
-        CurrencyConversion response = responseEntity.getBody();
+        ResponseEntity<ExchangeValue> responseEntity = new RestTemplate().getForEntity("http://localhost:8000/currency-exchange/from/{from}/to/{to}", ExchangeValue.class, uriVariables);
+        ExchangeValue response = responseEntity.getBody();
 
         CurrencyConversion currencyConversion = new CurrencyConversion(response.getId(), from, to, response.getConversionMultiple(),
                                                                        quantity, quantity.multiply(response.getConversionMultiple()), response.getPort());
@@ -37,7 +38,7 @@ public class CurrencyConversionController {
 
     @GetMapping("/currency-conversion-feign/from/{from}/to/{to}/quantity/{quantity}")
     public CurrencyConversion retrieveCurrencyConversionFeign(@PathVariable String from, @PathVariable String to, @PathVariable BigDecimal quantity) {
-        CurrencyConversion response = currencyExchangeServiceProxy.retrieveExchangeValue(from, to);
+        ExchangeValue response = currencyExchangeServiceProxy.retrieveExchangeValue(from, to);
         CurrencyConversion currencyConversion = new CurrencyConversion(response.getId(), from, to, response.getConversionMultiple(),
                                                                        quantity, quantity.multiply(response.getConversionMultiple()), response.getPort());
         return currencyConversion;

@@ -1,0 +1,30 @@
+apply plugin: 'java-library'
+apply plugin: 'maven-publish'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = jar.baseName
+            from components.java
+            artifact sourcesJar
+            artifact javadocJar
+        }
+    }
+}
+
+ext {
+    javaxPersistenceApiVersion = '2.2'
+    jacksonAnnotationsVersion = '2.9.0'
+}
+
+dependencies {
+    implementation("javax.persistence:javax.persistence-api:${javaxPersistenceApiVersion}")
+    implementation("com.fasterxml.jackson.core:jackson-annotations:${jacksonAnnotationsVersion}")
+}
+
