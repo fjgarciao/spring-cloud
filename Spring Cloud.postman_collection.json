@@ -126,6 +126,64 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Get Currency Conversion 1000 USR -> INR",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8100/currency-conversion/from/USD/to/INR/quantity/1000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8100",
+					"path": [
+						"currency-conversion",
+						"from",
+						"USD",
+						"to",
+						"INR",
+						"quantity",
+						"1000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Currency Conversion Feign 1000 USR -> INR",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8100/currency-conversion-feign/from/USD/to/INR/quantity/1000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8100",
+					"path": [
+						"currency-conversion-feign",
+						"from",
+						"USD",
+						"to",
+						"INR",
+						"quantity",
+						"1000"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
