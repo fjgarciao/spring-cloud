@@ -1,6 +1,8 @@
 package com.in28minutes.microservices.currencyconversionservice;
 
 import com.in28minutes.microservices.currencyconversionservice.bean.CurrencyConversion;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +15,8 @@ import java.util.Map;
 
 @RestController
 public class CurrencyConversionController {
+
+    private static final Logger logger = LoggerFactory.getLogger(CurrencyConversionController.class);
 
     private CurrencyExchangeServiceProxy currencyExchangeServiceProxy;
 
@@ -32,6 +36,8 @@ public class CurrencyConversionController {
 
         CurrencyConversion currencyConversion = new CurrencyConversion(response.getId(), from, to, response.getConversionMultiple(),
                                                                        quantity, quantity.multiply(response.getConversionMultiple()), response.getPort());
+
+        logger.info("{}", currencyConversion);
         return currencyConversion;
     }
 
@@ -40,6 +46,8 @@ public class CurrencyConversionController {
         CurrencyConversion response = currencyExchangeServiceProxy.retrieveExchangeValue(from, to);
         CurrencyConversion currencyConversion = new CurrencyConversion(response.getId(), from, to, response.getConversionMultiple(),
                                                                        quantity, quantity.multiply(response.getConversionMultiple()), response.getPort());
+
+        logger.info("{}", currencyConversion);
         return currencyConversion;
     }
 }
