@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '2.1.1.RELEASE'
+		springBootVersion = '2.0.2.RELEASE'
 	}
 	repositories {
 		mavenCentral()
@@ -24,13 +24,14 @@ repositories {
 	maven { url "https://repo.spring.io/milestone" }
 }
 
-ext['springCloudVersion'] = 'Greenwich.M3'
+ext['springCloudVersion'] = 'Finchley.SR1'
 
 dependencies {
 	annotationProcessor('org.springframework.boot:spring-boot-configuration-processor')
 	implementation('org.springframework.boot:spring-boot-starter-actuator')
 	implementation('org.springframework.boot:spring-boot-starter-web')
 	implementation('org.springframework.cloud:spring-cloud-starter-config')
+	implementation('org.springframework.cloud:spring-cloud-starter-bus-amqp')
 	runtimeOnly('org.springframework.boot:spring-boot-devtools')
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
 }
